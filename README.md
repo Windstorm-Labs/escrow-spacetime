@@ -37,10 +37,10 @@ experiments/
 git clone https://github.com/Windstorm-Labs/escrow-spacetime
 cd escrow-spacetime
 python -m venv .venv && source .venv/bin/activate
-pip install numpy scipy matplotlib
+pip install numpy scipy matplotlib torch
 
 # 1+1D — reproduces the 1/30 prefactor in the small-d₁ window
-python experiments/lattice_1d_modular.py
+python experiments/lattice_1d_modular.py    # requires the __main__ single-mass d₁-sweep driver
 
 # 3+1D — reproduces the peaked-then-decay functional form
 python experiments/lattice_3d_modular.py
@@ -51,11 +51,11 @@ Both scripts are self-contained: they construct the free scalar Hamiltonian on a
 ## Hardware
 
 - **Hardware:** Current-generation Nvidia GPU (32 GB VRAM, CUDA), Intel Core Ultra 9 285K, 256 GB RAM
-- **Note:** GPU is *optional* for these scripts; CPU is sufficient. GPU acceleration is used in the larger lattice-survey sweeps documented in Paper 13's `Windstorm-Labs/lattice-qft-test` repo.
+- **Note:** The 3+1D script requires **PyTorch** (`torch`) as a mandatory dependency; a CUDA GPU is *optional* and CPU is sufficient. GPU acceleration is used in the larger lattice-survey sweeps documented in Paper 13's `Windstorm-Labs/lattice-qft-test` repo.
 
 ## Why this code lives in two repos
 
-Paper 13 (the standalone lattice paper) and Paper 14 (the GR-translation paper) both reference these computations. Rather than have either repo depend on the other for reproduction, both repos ship the canonical scripts directly. The scripts are byte-identical across the two repos and produce the same outputs.
+Paper 13 (the standalone lattice paper) and Paper 14 (the GR-translation paper) both reference these computations. Rather than have either repo depend on the other for reproduction, both repos ship the canonical scripts directly. The 1+1D script (`lattice_1d_modular.py`) is byte-identical across the two repos and produces the same outputs; the 3+1D script (`lattice_3d_modular.py`) is specific to this repo.
 
 ## In the Series
 
